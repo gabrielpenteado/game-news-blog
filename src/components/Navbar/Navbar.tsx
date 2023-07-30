@@ -1,19 +1,19 @@
-import "./Navbar.css";
 import logo from "../../images/gamenews.png";
+import { Button, ImageLogo, InputSpace, Nav } from "./Navbar.style";
 
 export function Navbar() {
   return (
     <>
-      <nav>
-        <div className="input-search-space">
+      <Nav>
+        <InputSpace>
           <i className="bi bi-search"></i>
           <input type="text" placeholder="Search for news" />
-        </div>
+        </InputSpace>
 
-        <img src={logo} alt="Logo Game News" />
+        <ImageLogo src={logo} alt="Logo Game News" />
 
-        <button>Entrar</button>
-      </nav>
+        <Button>Entrar</Button>
+      </Nav>
     </>
   );
 }
