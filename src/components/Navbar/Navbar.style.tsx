@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Nav = styled.nav`
+export const StyledNav = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -11,20 +11,20 @@ export const Nav = styled.nav`
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 `;
 
-export const ImageLogo = styled.img`
+export const StyledImageLogo = styled.img`
   width: 16rem;
   height: 2.8rem;
   cursor: pointer;
   margin-right: 6rem;
 `;
 
-export const InputSpace = styled.div`
+export const StyledInputSpace = styled.div`
   position: relative;
   width: 14rem;
   display: flex;
   align-items: center;
 
-  i {
+  button {
     position: absolute;
     top: 1;
     right: 0.2rem;
@@ -34,6 +34,13 @@ export const InputSpace = styled.div`
     color: #757575;
     border-radius: 0.3rem;
     padding: 0.5rem;
+    transition: 0.3s;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #0bade3;
+      color: whitesmoke;
+    }
   }
 
   input {
@@ -51,7 +58,7 @@ export const InputSpace = styled.div`
   }
 `;
 
-export const Button = styled.button`
+export const StyledButton = styled.button`
   background-color: #0bade3;
   border: none;
   outline: none;
