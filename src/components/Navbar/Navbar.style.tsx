@@ -77,3 +77,13 @@ export const StyledButton = styled.button`
     background-color: #0a86af;
   }
 `;
+
+export const StyledErrorSpan = styled.span`
+  display: flex;
+  justify-content: center;
+  background-color: #ffaeae;
+  color: #9e0000;
+  padding: 1rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+`;

@@ -2,25 +2,40 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../../images/gamenews.png";
 import {
   StyledButton,
+  StyledErrorSpan,
   StyledImageLogo,
   StyledInputSpace,
   StyledNav,
 } from "./Navbar.style";
 
 import { useForm, SubmitHandler } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 type Inputs = {
   title: string;
 };
+
+const searchSchema = z.object({
+  title: z
+    .string()
+    .nonempty({ message: "Write some title to search for..." })
+    .refine((value) => !/^\s*$/.test(value), {
+      message: "Search is invalid for spaces.",
+    }),
+});
+
+// this regex -> /^\s*$/ check if there are only a "space" in the input field,
+// and return true if yes. If you put ! in front, this regex return false.
 
 export function Navbar() {
   const {
     register,
     handleSubmit,
     reset,
+    formState: { errors },
     // watch,
-    // formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<Inputs>({ resolver: zodResolver(searchSchema) });
 
   const navigate = useNavigate();
 
@@ -55,6 +70,9 @@ export function Navbar() {
 
         <StyledButton>Entrar</StyledButton>
       </StyledNav>
+      {errors.title && (
+        <StyledErrorSpan>{errors.title.message}</StyledErrorSpan>
+      )}
     </>
   );
 }
