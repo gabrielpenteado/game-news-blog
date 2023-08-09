@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { signinSchema } from "../../schemas/signinSchema";
 import { signupSchema } from "../../schemas/signupSchema";
 import { StyledErrorSpan } from "../../components/Navbar/Navbar.style";
+import { signin, singnup } from "../../services/userServices";
 
 type SignInFormValues = {
   email: string;
@@ -37,10 +38,25 @@ export function Auth() {
     resolver: zodResolver(signupSchema),
   });
 
-  const signInSubmit: SubmitHandler<SignInFormValues> = (data) =>
-    console.log(data);
-  const signUpSubmit: SubmitHandler<SignUpFormValues> = (data) =>
-    console.log(data);
+  const signInSubmit: SubmitHandler<SignInFormValues> = async (data) => {
+    // console.log(data);
+    try {
+      const response = await signin(data);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const signUpSubmit: SubmitHandler<SignUpFormValues> = async (data) => {
+    // console.log(data);
+    try {
+      const response = await singnup(data);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <AuthContainer>
