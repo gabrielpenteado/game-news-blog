@@ -58,32 +58,12 @@ export const StyledInputSpace = styled.div`
   }
 `;
 
-export const StyledButton = styled.button`
-  background-color: #0bade3;
-  border: none;
-  outline: none;
-  font-size: 1rem;
-  transition: all 0.4s ease-in-out;
-  cursor: pointer;
-  font-family: Roboto, Arial;
-  font-weight: 500;
-  letter-spacing: 0.1rem;
-  color: #fff;
-  border-radius: 0.3rem;
-  padding: 0.4rem 1rem;
-  text-transform: uppercase;
-
-  &:hover {
-    background-color: #0a86af;
-  }
-`;
-
 export const StyledErrorSpan = styled.span`
   display: flex;
   justify-content: center;
-  background-color: #ffaeae;
+  background-color: #ffcdcd;
   color: #9e0000;
-  padding: 1rem;
-  font-size: 1.1rem;
-  font-weight: bold;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 0.3rem;
 `;

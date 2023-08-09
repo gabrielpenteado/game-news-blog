@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../images/gamenews.png";
 import {
-  StyledButton,
   StyledErrorSpan,
   StyledImageLogo,
   StyledInputSpace,
@@ -9,21 +8,14 @@ import {
 } from "./Navbar.style";
 
 import { useForm, SubmitHandler } from "react-hook-form";
-import { z } from "zod";
+import { searchSchema } from "../../schemas/searchSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+
+import { Button } from "../Button/Button";
 
 type Inputs = {
   title: string;
 };
-
-const searchSchema = z.object({
-  title: z
-    .string()
-    .nonempty({ message: "Write some title to search for..." })
-    .refine((value) => !/^\s*$/.test(value), {
-      message: "Search is invalid for spaces.",
-    }),
-});
 
 // this regex -> /^\s*$/ check if there are only a "space" in the input field,
 // and return true if yes. If you put ! in front, this regex return false.
@@ -68,7 +60,9 @@ export function Navbar() {
           <StyledImageLogo src={logo} alt="Logo Game News" />
         </Link>
 
-        <StyledButton>Entrar</StyledButton>
+        <Link to="/auth">
+          <Button type="button" text="Login" />
+        </Link>
       </StyledNav>
       {errors.title && (
         <StyledErrorSpan>{errors.title.message}</StyledErrorSpan>

@@ -6,6 +6,7 @@ import { Search } from "./pages/Search/Search.tsx";
 import { GlobalStyle } from "./GlobalStyle.tsx";
 import { ErrorPage } from "./pages/ErrorPage/ErrorPage.tsx";
 import App from "./App.tsx";
+import { Auth } from "./pages/Auth/Auth.tsx";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
         element: <Search />,
       },
     ],
+  },
+  {
+    path: "/auth",
+    element: <Auth />,
   },
 ]);
 
