@@ -11,13 +11,15 @@ export default function Home() {
 
   async function findAllNews() {
     const response = await getAllNews();
-    setNews(response.data.results);
+    // setNews(response.data.results);
+    setNews(response);
     // console.log(response.data.results);
   }
 
   async function findTopNew() {
     const response = await getTopNew();
-    setTopNew(response.data.news);
+    // setTopNew(response.data.news);
+    setTopNew(response);
     // console.log(response.data.news);
   }
 

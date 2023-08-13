@@ -12,7 +12,8 @@ interface SignInDataProps {
   password: string;
 }
 
-const baseURL = "http://localhost:3000";
+// const baseURL = "http://localhost:3000";
+const baseURL = "https://api-game-news-blog.onrender.com";
 
 function generateUsername(name: string) {
   const nameToLowerCaseWithoutSpaces = name.replace(/\s/g, "").toLowerCase();
@@ -39,5 +40,10 @@ export function singnup(data: SignUpDataProps) {
 
 export function signin(data: SignInDataProps) {
   const response = axios.post(`${baseURL}/auth`, data);
+  return response;
+}
+
+export function getUserById(id: string) {
+  const response = axios.get(`${baseURL}/user/${id}`);
   return response;
 }

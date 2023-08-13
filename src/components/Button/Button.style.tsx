@@ -5,7 +5,7 @@ type StyledButtonProps = {
 };
 
 export const StyledButton = styled.button<StyledButtonProps>`
-  background-color: #0bade3;
+  background-color: #0b97c5;
   border: none;
   outline: none;
   font-size: 1rem;
@@ -21,6 +21,6 @@ export const StyledButton = styled.button<StyledButtonProps>`
   text-transform: uppercase;
 
   &:hover {
-    background-color: #0a86af;
+    background-color: #096888;
   }
 `;

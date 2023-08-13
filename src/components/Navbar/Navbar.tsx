@@ -13,7 +13,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Button } from "../Button/Button";
 
-type Inputs = {
+export type Inputs = {
   title: string;
 };
 

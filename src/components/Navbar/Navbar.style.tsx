@@ -6,9 +6,9 @@ export const StyledNav = styled.nav`
   align-items: center;
   max-width: 100%;
   padding: 1rem;
-  background-color: white;
+  background-color: #aaaaaa;
   z-index: 1;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 `;
 
 export const StyledImageLogo = styled.img`
@@ -26,7 +26,8 @@ export const StyledInputSpace = styled.div`
 
   button {
     position: absolute;
-    top: 1;
+    /* top: 1; */
+    height: 100%;
     right: 0.2rem;
     z-index: 10;
     border: none;
@@ -34,26 +35,26 @@ export const StyledInputSpace = styled.div`
     color: #757575;
     border-radius: 0.3rem;
     padding: 0.5rem;
-    transition: 0.3s;
     cursor: pointer;
+    transition: 0.3s;
 
     &:hover {
-      background-color: #0bade3;
+      background-color: #096888;
       color: whitesmoke;
     }
   }
 
   input {
     outline: none;
-    width: 100%;
-    font-size: 1rem;
+    /* width: 100%; */
+    /* font-size: 1rem; */
     border: none;
     background-color: whitesmoke;
     border-radius: 0.3rem;
     padding: 0.6rem;
 
     &:focus {
-      border: 1px solid #0bade3;
+      /* border: 1px solid #096888; */
     }
   }
 `;

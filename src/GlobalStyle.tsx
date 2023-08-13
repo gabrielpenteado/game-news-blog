@@ -7,7 +7,7 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     /* box-sizing: border-box; */
     /* font-family: Newsreader, Arial; */
-    /* font-family: 'Roboto', sans-serif; */
+    font-family: 'Roboto', sans-serif;
     font-family: 'Newsreader', serif;
   }
 

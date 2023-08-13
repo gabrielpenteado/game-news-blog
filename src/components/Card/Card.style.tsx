@@ -13,6 +13,7 @@ export const StyledCardContainer = styled.section`
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 0.3rem;
   margin-top: 1rem;
+  cursor: pointer;
 `;
 
 export const StyledCardHeader = styled.article<CardBodyProps>`
@@ -56,10 +57,12 @@ export const StyledCardFooter = styled.article`
   align-items: center;
   justify-content: end;
   gap: 1rem;
+  margin-bottom: 2rem;
 
   section {
     display: flex;
     align-items: center;
     gap: 0.2rem;
+    /* padding-bottom: 1rem; */
   }
 `;
