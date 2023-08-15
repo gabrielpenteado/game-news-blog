@@ -30,8 +30,8 @@ export const StyledSection = styled.section<StyledSectionProps>`
   padding: 2rem;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   gap: 1rem;
-  background-color: ${(props) => (props.type === "signin" ? "blue" : "white")};
-  color: ${(props) => (props.type === "signup" ? "blue" : "white")};
+  background-color: ${(props) => (props.type === "signin" ? "#1434A4" : "white")};
+  color: ${(props) => (props.type === "signup" ? "#1434A4" : "white")};
 
   h2 {
     font-size: 2rem;

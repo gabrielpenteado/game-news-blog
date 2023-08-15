@@ -8,6 +8,9 @@ import { signinSchema } from "../../schemas/signinSchema";
 import { signupSchema } from "../../schemas/signupSchema";
 import { StyledErrorSpan } from "../../components/Navbar/Navbar.style";
 import { signin, singnup } from "../../services/userServices";
+import Cookies from 'js-cookie';
+import { useNavigate } from "react-router-dom";
+
 
 type SignInFormValues = {
   email: string;
@@ -38,11 +41,16 @@ export function Auth() {
     resolver: zodResolver(signupSchema),
   });
 
+  const navigate = useNavigate();
+
   const signInSubmit: SubmitHandler<SignInFormValues> = async (data) => {
     // console.log(data);
     try {
       const response = await signin(data);
-      console.log(response);
+      // console.log(response);
+      Cookies.set("token", response.data.token, { expires: 1 })
+
+      navigate("/")
     } catch (error) {
       console.log(error);
     }
@@ -52,7 +60,10 @@ export function Auth() {
     // console.log(data);
     try {
       const response = await singnup(data);
-      console.log(response);
+      // console.log(response);
+      Cookies.set("token", response.data.token, { expires: 1 })
+
+      navigate("/")
     } catch (error) {
       console.log(error);
     }
