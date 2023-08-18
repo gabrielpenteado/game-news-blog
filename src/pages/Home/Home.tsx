@@ -3,7 +3,7 @@ import { StyledHomeBody, StyledHomeHeader } from "./Home.style";
 import { Card, Inew } from "../../components/Card/Card";
 import { getAllNews, getTopNew } from "../../services/newServices";
 
-import Cookies from 'js-cookie';
+// import Cookies from "js-cookie";
 
 export default function Home() {
   // javascript code
@@ -28,7 +28,7 @@ export default function Home() {
   useEffect(() => {
     findAllNews();
     findTopNew();
-    console.log(Cookies.get("token"));
+    // console.log(Cookies.get("token"));
   }, []);
 
   return (

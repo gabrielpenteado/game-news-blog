@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 
 interface SignUpDataProps {
   name: string;
@@ -39,5 +40,14 @@ export function singnup(data: SignUpDataProps) {
 
 export function signin(data: SignInDataProps) {
   const response = axios.post(`${baseURL}/auth`, data);
+  return response;
+}
+
+export function userLogged() {
+  const response = axios.get(`${baseURL}/user/:id`, {
+    headers: {
+      Authorization: `Bearer ${Cookies.get("token")}`,
+    },
+  });
   return response;
 }
