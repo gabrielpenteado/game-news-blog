@@ -1,5 +1,5 @@
 import axios from "axios";
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 
 interface SignUpDataProps {
   name: string;
@@ -43,11 +43,7 @@ export function signin(data: SignInDataProps) {
   return response;
 }
 
-export function userLogged() {
-  const response = axios.get(`${baseURL}/user/:id`, {
-    headers: {
-      Authorization: `Bearer ${Cookies.get("token")}`,
-    },
-  });
+export function getUserById(id: string) {
+  const response = axios.get(`${baseURL}/user/${id}`);
   return response;
 }

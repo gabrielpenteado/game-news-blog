@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../images/gamenews.png";
 import Cookies from "js-cookie";
+import jwt_decode, { JwtPayload } from "jwt-decode";
 
 import {
   StyledErrorSpan,
@@ -15,12 +16,15 @@ import { searchSchema } from "../../schemas/searchSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Button } from "../Button/Button";
-import { userLogged } from "../../services/userServices";
+// import { userLogged } from "../../services/userServices";
 import { useEffect, useState } from "react";
+import { getUserById } from "../../services/userServices";
 
 type Inputs = {
   title: string;
 };
+
+type customJwtPayload = JwtPayload & { id: string };
 
 interface User {
   avatar: string;
@@ -58,11 +62,28 @@ export function Navbar() {
 
   // console.log(watch("title")); // watch input value by passing the name of it
 
-  const findUserLogged = async () => {
+  // const findUserLogged = async () => {
+  //   try {
+  //     const response = await userLogged();
+  //     // console.log(response);
+  //     setUser(response.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  const decodeToken = async () => {
     try {
-      const response = await userLogged();
-      // console.log(response);
-      setUser(response.data);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const token: any = Cookies.get("token");
+      // console.log(token);
+      const decoded = jwt_decode<customJwtPayload>(token);
+      // console.log(decoded.id);
+      const userId = decoded.id;
+      const userLogged = await getUserById(userId);
+      // console.log(userLogged.data);
+
+      setUser(userLogged.data);
     } catch (error) {
       console.log(error);
     }
@@ -72,7 +93,7 @@ export function Navbar() {
 
   useEffect(() => {
     if (Cookies.get("token")) {
-      findUserLogged();
+      decodeToken();
     }
   }, []);
 
