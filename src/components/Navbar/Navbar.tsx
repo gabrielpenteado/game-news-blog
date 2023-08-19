@@ -68,7 +68,11 @@ export function Navbar() {
     }
   };
 
-  const signout = () => {};
+  const signout = () => {
+    Cookies.remove("token");
+    setUser(undefined);
+    navigate("/");
+  };
 
   useEffect(() => {
     if (Cookies.get("token")) {

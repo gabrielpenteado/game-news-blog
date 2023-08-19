@@ -8,9 +8,9 @@ import { signinSchema } from "../../schemas/signinSchema";
 import { signupSchema } from "../../schemas/signupSchema";
 import { StyledErrorSpan } from "../../components/Navbar/Navbar.style";
 import { signin, singnup } from "../../services/userServices";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
-
+import { useState } from "react";
 
 type SignInFormValues = {
   email: string;
@@ -25,6 +25,8 @@ type SignUpFormValues = {
 };
 
 export function Auth() {
+  const [loginError, setLoginError] = useState("");
+
   const {
     register: registerSignIn,
     handleSubmit: handleSubmitSignIn,
@@ -48,11 +50,13 @@ export function Auth() {
     try {
       const response = await signin(data);
       // console.log(response);
-      Cookies.set("token", response.data.token, { expires: 1 })
+      Cookies.set("token", response.data.token, { expires: 1 });
 
-      navigate("/")
-    } catch (error) {
-      console.log(error);
+      navigate("/");
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      // console.log(error.response.data);
+      setLoginError(error.response.data.message);
     }
   };
 
@@ -61,9 +65,9 @@ export function Auth() {
     try {
       const response = await singnup(data);
       // console.log(response);
-      Cookies.set("token", response.data.token, { expires: 1 })
+      Cookies.set("token", response.data.token, { expires: 1 });
 
-      navigate("/")
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
@@ -95,6 +99,7 @@ export function Auth() {
           )}
 
           <Button type="submit" text="Sign In" />
+          {loginError && <StyledErrorSpan>{loginError}</StyledErrorSpan>}
         </form>
       </StyledSection>
 
