@@ -16,28 +16,29 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Button } from "../Button/Button";
 import { userLogged } from "../../services/userServices";
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
+import { UserContext } from "../../Contexts/UserContext";
 
 type Inputs = {
   title: string;
 };
 
-interface User {
-  avatar: string;
-  background: string;
-  email: string;
-  name: string;
-  updateAt: string;
-  username: string;
-  __v: number;
-  _id: string;
-}
+// interface User {
+//   avatar: string;
+//   background: string;
+//   email: string;
+//   name: string;
+//   updateAt: string;
+//   username: string;
+//   __v: number;
+//   _id: string;
+// }
 
 // this regex -> /^\s*$/ check if there are only a "space" in the input field,
 // and return true if yes. If you put ! in front, this regex return false.
 
 export function Navbar() {
-  const [user, setUser] = useState<User | undefined>(undefined);
+  const { user, setUser } = useContext(UserContext);
 
   const {
     register,
@@ -78,6 +79,7 @@ export function Navbar() {
     if (Cookies.get("token")) {
       findUserLogged();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -102,7 +104,9 @@ export function Navbar() {
 
         {user ? (
           <StyledUserLoggedSpace>
-            <h2>{user?.name}</h2>
+            <Link to="/profile">
+              <h2>{user?.name}</h2>
+            </Link>
             <i className="bi bi-box-arrow-right" onClick={signout}></i>
           </StyledUserLoggedSpace>
         ) : (
