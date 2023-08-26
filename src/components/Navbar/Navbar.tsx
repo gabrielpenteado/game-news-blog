@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../images/gamenews.png";
 import Cookies from "js-cookie";
-import jwt_decode, { JwtPayload } from "jwt-decode";
 
 import {
   StyledErrorSpan,
@@ -17,31 +16,30 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Button } from "../Button/Button";
 // import { userLogged } from "../../services/userServices";
-import { useEffect, useState } from "react";
-import { getUserById } from "../../services/userServices";
+import { useContext, useEffect } from "react";
+import { UserContext } from "../../Contexts/userContexts";
+import { decodeToken, getUserById } from "../../services/userServices";
 
 type Inputs = {
   title: string;
 };
 
-type customJwtPayload = JwtPayload & { id: string };
-
-interface User {
-  avatar: string;
-  background: string;
-  email: string;
-  name: string;
-  updateAt: string;
-  username: string;
-  __v: number;
-  _id: string;
-}
+// interface User {
+//   avatar: string;
+//   background: string;
+//   email: string;
+//   name: string;
+//   updateAt: string;
+//   username: string;
+//   __v: number;
+//   _id: string;
+// }
 
 // this regex -> /^\s*$/ check if there are only a "space" in the input field,
 // and return true if yes. If you put ! in front, this regex return false.
 
 export function Navbar() {
-  const [user, setUser] = useState<User | undefined>(undefined);
+  const { user, setUser } = useContext(UserContext);
 
   const {
     register,
@@ -62,39 +60,31 @@ export function Navbar() {
 
   // console.log(watch("title")); // watch input value by passing the name of it
 
-  // const findUserLogged = async () => {
-  //   try {
-  //     const response = await userLogged();
-  //     // console.log(response);
-  //     setUser(response.data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  // const userId = decodeToken();
+  // console.log(userId);
 
-  const decodeToken = async () => {
+  const findUserLogged = async () => {
     try {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const token: any = Cookies.get("token");
-      // console.log(token);
-      const decoded = jwt_decode<customJwtPayload>(token);
-      // console.log(decoded.id);
-      const userId = decoded.id;
-      const userLogged = await getUserById(userId);
-      // console.log(userLogged.data);
-
-      setUser(userLogged.data);
+      const userId = decodeToken();
+      const response = await getUserById(userId);
+      // console.log(response.data);
+      setUser(response.data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const signout = () => {};
+  const signout = () => {
+    Cookies.remove("token");
+    setUser(undefined);
+    navigate("/");
+  };
 
   useEffect(() => {
     if (Cookies.get("token")) {
-      decodeToken();
+      findUserLogged();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -119,7 +109,9 @@ export function Navbar() {
 
         {user ? (
           <StyledUserLoggedSpace>
-            <h2>{user?.name}</h2>
+            <Link to="/profile">
+              <h2>{user?.name}</h2>
+            </Link>
             <i className="bi bi-box-arrow-right" onClick={signout}></i>
           </StyledUserLoggedSpace>
         ) : (

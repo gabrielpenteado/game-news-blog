@@ -7,6 +7,8 @@ import { GlobalStyle } from "./GlobalStyle.tsx";
 import { ErrorPage } from "./pages/ErrorPage/ErrorPage.tsx";
 import App from "./App.tsx";
 import { Auth } from "./pages/Auth/Auth.tsx";
+import Profile from "./pages/Profile/Profile.tsx";
+import { UserProvider } from "./Contexts/userContexts.tsx";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +24,10 @@ const router = createBrowserRouter([
         path: "/search/:title",
         element: <Search />,
       },
+      {
+        path: "/profile",
+        element: <Profile />,
+      },
     ],
   },
   {
@@ -33,6 +39,8 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <GlobalStyle />
-    <RouterProvider router={router} />
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
   </React.StrictMode>
 );

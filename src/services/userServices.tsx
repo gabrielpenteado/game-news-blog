@@ -1,5 +1,6 @@
 import axios from "axios";
-// import Cookies from "js-cookie";
+import Cookies from "js-cookie";
+import jwt_decode, { JwtPayload } from "jwt-decode";
 
 interface SignUpDataProps {
   name: string;
@@ -12,6 +13,8 @@ interface SignInDataProps {
   email: string;
   password: string;
 }
+
+type customJwtPayload = JwtPayload & { id: string };
 
 const baseURL = "http://localhost:3000";
 
@@ -46,4 +49,15 @@ export function signin(data: SignInDataProps) {
 export function getUserById(id: string) {
   const response = axios.get(`${baseURL}/user/${id}`);
   return response;
+}
+
+// yarn add -D @types/jwt-decode
+export function decodeToken() {
+  const token = Cookies.get("token");
+  // console.log(token);
+  if (token) {
+    const decoded = jwt_decode<customJwtPayload>(token);
+    // console.log(decoded.id);
+    return decoded.id;
+  }
 }
