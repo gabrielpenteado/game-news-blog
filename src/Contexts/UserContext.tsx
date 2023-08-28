@@ -1,9 +1,14 @@
 import { createContext, useState } from "react";
 
 interface IUser {
-  name: string;
+  avatar: string;
+  background: string;
   email: string;
-  password: string;
+  name: string;
+  updateAt: string;
+  username: string;
+  __v: number;
+  _id: string;
 }
 
 interface IUserContext {

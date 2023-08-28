@@ -62,7 +62,7 @@ export function Navbar() {
   const findUserLogged = async () => {
     try {
       const response = await userLogged();
-      // console.log(response);
+      console.log(response.data);
       setUser(response.data);
     } catch (error) {
       console.log(error);
@@ -104,7 +104,7 @@ export function Navbar() {
 
         {user ? (
           <StyledUserLoggedSpace>
-            <Link to="/profile">
+            <Link to="/profile" style={{ textDecoration: "none" }}>
               <h2>{user?.name}</h2>
             </Link>
             <i className="bi bi-box-arrow-right" onClick={signout}></i>
