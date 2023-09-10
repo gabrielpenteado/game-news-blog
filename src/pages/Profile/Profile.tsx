@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../Contexts/UserContext";
 import {
   ProfileActions,
@@ -8,11 +8,26 @@ import {
   ProfileHeader,
   ProfileIconAdd,
   ProfileIconEdit,
+  ProfileNews,
   ProfileUser,
 } from "./Profile.style";
 
+import { getAllNewsByUser } from "../../services/newServices";
+import { Card, Inew } from "../../components/Card/Card";
+
 export function Profile() {
   const { user } = useContext(UserContext);
+  const [news, setNews] = useState([]);
+
+  async function findAllNewsByUser() {
+    const response = await getAllNewsByUser();
+    // console.log(response.data);
+    setNews(response.data.results);
+  }
+
+  useEffect(() => {
+    findAllNewsByUser();
+  },[])
 
   return (
     <ProfileContainer>
@@ -34,7 +49,25 @@ export function Profile() {
             <i className="bi bi-plus-circle"></i>
           </ProfileIconAdd>
         </ProfileActions>
+
       </ProfileHeader>
+
+      <ProfileNews>
+        {news.length === 0 && <h3>You didn't create any news.</h3>}
+
+        {news.map((item: Inew, index: number) => {
+          return (
+            <Card 
+            key={index}
+            title={item.title}
+            text={item.text}
+            banner={item.banner}
+            likes={item.likes}
+            comments={item.comments}
+            />
+          )
+        })}
+      </ProfileNews>
     </ProfileContainer>
   );
 }
