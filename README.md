@@ -39,7 +39,7 @@
 </p>
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/gabrielpenteado/game-news-blog/main/public/gamenewsblog.jpg"> 
+    <img src="https://raw.githubusercontent.com/gabrielpenteado/game-news-blog/main/public/gamenews.png"> 
 </p>
 
 ### Built with
@@ -57,7 +57,6 @@
 You can access the project website by clicking below:
 🔜
 <!-- [![vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://www.google.com) -->
-<br>
 <br>
 
 ## ▶️ Getting started 
@@ -95,7 +94,6 @@ To start using <strong>Game News Blog</strong> follow the instructions below.
 
 5. Start testing<br>
 `npm run dev`
-<br>
 
 ## 🔛 Features
 
@@ -107,8 +105,6 @@ To start using <strong>Game News Blog</strong> follow the instructions below.
 
 ### ◾ Posts with comments and likes
 <p>An authenticated user can comment and like posts.</p>
-
-<br>
 
 ## 🤝 Contributions
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)<br>
