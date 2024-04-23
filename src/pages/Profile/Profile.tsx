@@ -14,6 +14,7 @@ import {
 
 import { getAllNewsByUser } from "../../services/newServices";
 import { Card, Inew } from "../../components/Card/Card";
+import { Link } from "react-router-dom";
 
 export function Profile() {
   const { user } = useContext(UserContext);
@@ -27,7 +28,7 @@ export function Profile() {
 
   useEffect(() => {
     findAllNewsByUser();
-  },[])
+  }, []);
 
   return (
     <ProfileContainer>
@@ -45,11 +46,12 @@ export function Profile() {
         </ProfileUser>
 
         <ProfileActions>
-          <ProfileIconAdd>
-            <i className="bi bi-plus-circle"></i>
-          </ProfileIconAdd>
+          <Link to="/manage-news/add">
+            <ProfileIconAdd>
+              <i className="bi bi-plus-circle"></i>
+            </ProfileIconAdd>
+          </Link>
         </ProfileActions>
-
       </ProfileHeader>
 
       <ProfileNews>
@@ -57,15 +59,15 @@ export function Profile() {
 
         {news.map((item: Inew, index: number) => {
           return (
-            <Card 
-            key={index}
-            title={item.title}
-            text={item.text}
-            banner={item.banner}
-            likes={item.likes}
-            comments={item.comments}
+            <Card
+              key={index}
+              title={item.title}
+              text={item.text}
+              banner={item.banner}
+              likes={item.likes}
+              comments={item.comments}
             />
-          )
+          );
         })}
       </ProfileNews>
     </ProfileContainer>

@@ -9,6 +9,7 @@ import App from "./App.tsx";
 import { Auth } from "./pages/Auth/Auth.tsx";
 import { Profile } from "./pages/Profile/Profile.tsx";
 import { UserProvider } from "./Contexts/UserContext.tsx";
+import { ManageNews } from "./pages/ManageNews/ManageNews.tsx";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />,
+      },
+      {
+        path: "/manage-news/:action",
+        element: <ManageNews />,
       },
     ],
   },

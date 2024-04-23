@@ -1,4 +1,5 @@
-import { StyledInput } from "./Input.style";
+import { useState } from "react";
+import { StyledInput, TextareaSpace } from "./Input.style";
 // import { UseFormRegister, FieldValues } from "react-hook-form";
 
 interface InputProps {
@@ -7,10 +8,40 @@ interface InputProps {
   name: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   register: any;
+  disabled?: boolean;
+  isInput?: boolean;
+  value?: string;
 }
 
-export function Input({ type, placeholder, name, register }: InputProps) {
+export function Input({
+  type,
+  placeholder,
+  name,
+  register,
+  isInput = true,
+  value: initialValue,
+  disabled,
+}: InputProps) {
+  const [value, setValue] = useState(initialValue);
+
+  const inputProps = {
+    type,
+    placeholder,
+    ...register(name),
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+      setValue(e.target.value),
+    disabled,
+  };
+
+  if (value) inputProps.value = value;
+
   return (
-    <StyledInput type={type} placeholder={placeholder} {...register(name)} />
+    <>
+      {isInput ? (
+        <StyledInput {...inputProps} />
+      ) : (
+        <TextareaSpace {...inputProps} />
+      )}
+    </>
   );
 }
