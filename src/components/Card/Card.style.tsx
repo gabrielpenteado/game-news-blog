@@ -26,6 +26,21 @@ export const StyledCardHeader = styled.article<CardBodyProps>`
     width: 100%;
     font-size: ${({ $top }) => ($top ? "1.7rem" : "0.9rem")};
   }
+
+  span {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 1rem;
+  }
+
+  i {
+    cursor: pointer;
+    color: #0bade3;
+    font-size: 1.1rem;
+    text-decoration: none;
+    border: none;
+  }
 `;
 
 export const StyledCardBody = styled.article`

@@ -29,7 +29,7 @@ export function singnup(data: SignUpDataProps) {
     ...data,
     username: generateUsername(data.name),
     avatar:
-      "https://www.pikpng.com/pngl/b/340-3409421_bonecos-png-user-account-clipart.png",
+      "https://icon-library.com/images/avatar-icon-images/avatar-icon-images-4.jpg",
     background:
       "https://img.freepik.com/free-photo/gradient-dark-blue-futuristic-digital-grid-background_53876-129728.jpg?w=1380&t=st=1690947594~exp=1690948194~hmac=9a969035607ba7094e0d8120739939e9775a682bc6ab02ea03f17b98e498835b",
   };

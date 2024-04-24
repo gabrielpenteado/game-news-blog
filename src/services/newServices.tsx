@@ -28,7 +28,7 @@ export function getAllNewsByUser() {
 }
 
 export function createNews(body: unknown) {
-  const response = axios.post(`${baseURL}/posts/create`, body, {
+  const response = axios.post(`${baseURL}/news`, body, {
     headers: {
       Authorization: `Bearer ${Cookies.get("token")}`,
     },
@@ -36,8 +36,8 @@ export function createNews(body: unknown) {
   return response;
 }
 
-export function editNews(body: unknown, id: string | undefined) {
-  const response = axios.patch(`${baseURL}/posts/update/${id}`, body, {
+export function editNews(body: unknown, id: string) {
+  const response = axios.patch(`${baseURL}/news/${id}`, body, {
     headers: {
       Authorization: `Bearer ${Cookies.get("token")}`,
     },
@@ -45,8 +45,8 @@ export function editNews(body: unknown, id: string | undefined) {
   return response;
 }
 
-export function deleteNews(id: string | undefined) {
-  const response = axios.delete(`${baseURL}/posts/delete/${id}`, {
+export function deleteNews(id: string) {
+  const response = axios.delete(`${baseURL}/news/${id}`, {
     headers: {
       Authorization: `Bearer ${Cookies.get("token")}`,
     },
@@ -54,8 +54,8 @@ export function deleteNews(id: string | undefined) {
   return response;
 }
 
-export function getNewsById(id: string | undefined) {
-  const response = axios.get(`${baseURL}/posts/byIdPost/${id}`, {
+export function getNewsById(id: string) {
+  const response = axios.get(`${baseURL}/news/${id}`, {
     headers: {
       Authorization: `Bearer ${Cookies.get("token")}`,
     },

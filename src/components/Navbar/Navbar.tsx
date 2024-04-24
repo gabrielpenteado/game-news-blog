@@ -62,7 +62,7 @@ export function Navbar() {
   const findUserLogged = async () => {
     try {
       const response = await userLogged();
-      console.log(response.data);
+      //   console.log(response.data);
       setUser(response.data);
     } catch (error) {
       console.log(error);

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { TextLimit } from "../TextLimit/TextLimit";
 import {
   StyledCardContainer,
@@ -13,9 +14,20 @@ export interface Inew {
   banner: string;
   likes: string[];
   comments: string[];
+  actions?: boolean;
+  id?: string;
 }
 
-export function Card({ $top, title, text, banner, likes, comments }: Inew) {
+export function Card({
+  $top,
+  title,
+  text,
+  banner,
+  likes,
+  comments,
+  actions = false,
+  id,
+}: Inew) {
   return (
     <StyledCardContainer>
       <StyledCardBody>
@@ -23,6 +35,18 @@ export function Card({ $top, title, text, banner, likes, comments }: Inew) {
 
         <div>
           <StyledCardHeader $top={$top}>
+            <Link to={`/manage-news/edit/${id}`}>
+              {actions && (
+                <span>
+                  <Link to={`/manage-news/edit/${id}`}>
+                    <i className="bi bi-pencil-square"></i>
+                  </Link>
+                  <Link to={`/manage-news/delete/${id}`}>
+                    <i className="bi bi-trash3"></i>
+                  </Link>
+                </span>
+              )}
+            </Link>
             <h2>{title}</h2>
             <TextLimit text={text} limit={150} />
           </StyledCardHeader>

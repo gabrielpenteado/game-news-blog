@@ -6,7 +6,13 @@ import { newsSchema } from "../../schemas/newsSchema";
 import { Input } from "../../components/Input/Input";
 import { StyledErrorSpan } from "../../components/Navbar/Navbar.style";
 import { Button } from "../../components/Button/Button";
-import { createNews, editNews } from "../../services/newServices";
+import {
+  createNews,
+  deleteNews,
+  editNews,
+  getNewsById,
+} from "../../services/newServices";
+import { useEffect } from "react";
 
 type RegisterNewsFormValues = {
   title: string;
@@ -18,11 +24,13 @@ export function ManageNews() {
   // receive the params "action" from the url
   const { action, id } = useParams();
   const navigate = useNavigate();
+  console.log(id);
 
   const {
     register: registerNews,
     handleSubmit: handleRegisterNews,
     formState: { errors: errorsRegisterNews },
+    setValue,
   } = useForm<RegisterNewsFormValues>({
     resolver: zodResolver(newsSchema),
   });
@@ -37,13 +45,55 @@ export function ManageNews() {
   }
 
   async function editNewsSubmit(data: RegisterNewsFormValues) {
-    try {
-      await editNews(data, id);
-      navigate("/profile");
-    } catch (error) {
-      console.log(error);
+    if (id) {
+      try {
+        await editNews(data, id);
+        navigate("/profile");
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
+
+  //   async function findNewsById(id: string) {
+  //     try {
+  //       const { data } = await getNewsById(id);
+  //       setValue("title", data.title);
+  //       setValue("banner", data.banner);
+  //       setValue("text", data.text);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+
+  async function deleteNewsSubmit() {
+    if (id) {
+      try {
+        await deleteNews(id);
+        navigate("/profile");
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+
+  useEffect(() => {
+    async function findNewsById(id: string) {
+      try {
+        const { data } = await getNewsById(id);
+        setValue("title", data.news.title);
+        setValue("banner", data.news.banner);
+        setValue("text", data.news.text);
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    if (id && (action === "edit" || action === "delete")) {
+      findNewsById(id);
+    }
+  }, [action, setValue, id]);
 
   return (
     <AddNewsContainer>
@@ -56,7 +106,9 @@ export function ManageNews() {
         onSubmit={
           action == "add"
             ? handleRegisterNews(registerNewsSubmit)
-            : handleRegisterNews(editNewsSubmit)
+            : action === "edit"
+            ? handleRegisterNews(editNewsSubmit)
+            : handleRegisterNews(deleteNewsSubmit)
         }
       >
         <Input
