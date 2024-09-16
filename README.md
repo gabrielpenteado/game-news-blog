@@ -37,7 +37,7 @@
 <p align="justify"> 
    A gaming newsletter / blog created with <strong>React</strong> and <strong>Typescript</strong> enhanced with
    <strong>Styled-Components</strong>.
-   This project integrates a <em>user system<em>, enabling each user to search for news by title, create posts, and engage in discussions through <em>comments<em> and <em>likes<em>. 
+   This project integrates a user system, enabling each user to search for news by title, create posts, and engage in discussions through comments and likes. 
 </p>
 
 <div align="center">
